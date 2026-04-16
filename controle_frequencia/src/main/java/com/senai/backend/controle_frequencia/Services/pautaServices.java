@@ -18,15 +18,15 @@ public class pautaServices {
         return pautaRepository.count();
     }
 
-    public Pauta buscarPauta(Integer id) {
+     public Pauta buscarPauta(Integer id){
         return pautaRepository.findById(id).get();
-    }
+    } 
 
     public List<Pauta> listarPautas(){
         return pautaRepository.findAll();
     }
 
-    public Boolean deletarPauta(Integer id) {
+    public Boolean deletarPauta(Integer id){
         if (pautaRepository.existsById(id)) {
             pautaRepository.deleteById(id);
             return true;
@@ -34,20 +34,22 @@ public class pautaServices {
         return false;
     }
 
-    public Pauta cadastrPauta(Pauta pauta) {
+    public Pauta cadastrarPauta(Pauta pauta){
         return pautaRepository.save(pauta);
     }
 
-    public Pauta atualizarPauta(Integer id, Pauta pauta) {
+    public Pauta atualizarPauta(Integer id, Pauta pauta){
         Pauta pautaRecuperada = buscarPauta(id);
         if (pautaRecuperada != null) {
             pautaRecuperada.setId(id);
-            if (pauta.getTurma() != null) {
+            if(pauta.getTurma()!=null){
                 pautaRecuperada.setTurma(pauta.getTurma());
             }
             return pautaRepository.save(pautaRecuperada);
         }
         return null;
-
     }
+
+
+   
 }
