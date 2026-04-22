@@ -5,28 +5,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.senai.backend.controle_frequencia.models.Turma;
 import com.senai.backend.controle_frequencia.repositeres.TurmaRepository;
-import
+
 
 
 
 
 @Service
-public class TurmaServices {
-    @Autowired
+public class TurmaService {
     
+    @Autowired
     private TurmaRepository turmaRepository;
+
     public Long contarTurma() {
-        return TurmaRepository.count();
+        return turmaRepository.count();
     }
     public Turma buscarTurma(Integer id) {
-        return TurmaRepository.finById(id).get();
+        return turmaRepository.findById(id).get();
     }
     public List<Turma>listaTurma(){
-        return TurmaRepository.findAII();
+        return turmaRepository.findAll();
     }
     public Boolean deletarTurma(Integer id){
-        if (TurmaRepository.existsById(id)){
+        if (turmaRepository.existsById(id)){
             turmaRepository.deleteById(id);
             return true;
         }
@@ -34,15 +36,18 @@ public class TurmaServices {
     }
     public Turma cadastrarTurma(Turma turma){
         return turmaRepository.save(turma);
-
+    }
     public Turma atualizarTurma(Integer id, Turma turma){
         Turma TurmaRecuperado = buscarTurma(id);
-            if (turmaRecuperada !=null){
-            turmaRecuperado.setId(id);
-            if (turma.getNome()!= null)}{
-                turmaRecuperado.setNome(turma.getNome());
+            if (TurmaRecuperado !=null){
+                TurmaRecuperado.setId(id);
+            if (turma.getTurma()!= null) {
+                TurmaRecuperado.setTurma(turma.getTurma());
             }
-            return TurmaRepository.save(turmaRecuperada);
+            if (turma.getTurma() != null) {
+                TurmaRecuperado.setTurma(turma.getTurma());
+            }
+            return turmaRepository.save(TurmaRecuperado);
         }
          return null;
     
@@ -50,10 +55,3 @@ public class TurmaServices {
             
 
 }
-
-            
-        
-
-
-    
-
